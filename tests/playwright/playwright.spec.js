@@ -22,14 +22,3 @@ test('get started link', async ({ page }) => {
   await page.waitForTimeout(5000);
 });
 
-// Executa todos os testes em modo headless
-// npx playwright test
-
-// Executa todos os testes em modo headful
-// npx playwright test --headed
-
-// Executa o primeiro teste
-// npx playwright test --headed --grep "has title"
-
-// Executa o segundo teste
-// npx playwright test --headed --grep "get started link"

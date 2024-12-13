@@ -26,7 +26,7 @@ Atualizando
 npm install -D @playwright/test@latest
 ```
 
-Instalar a extensão no code
+Instalar a extensão no Visual Studio Code
 
 Procurar por Playwright
 
@@ -35,5 +35,16 @@ v1.1.7
 
 Depois fazer a instalação da extensão, acessar a paleta de comandos `ctrl + shift + p` e usar o seguinte comando: install Playwright
 
+Instalando dependências
+
+```bash
+sudo npx playwright install-deps
+```
+
+Uma alternativa
+
+```bash
+sudo apt-get install libavif13
+```
 
 Próximo passo... [Executando o teste](executando-js.md)

@@ -1,12 +1,10 @@
 // Importando as funções necessárias do Playwright
-const { test, expect, webkit } = require('@playwright/test');
+const { test, expect } = require('@playwright/test');
 
 // Definindo a variável para o tempo de espera
 const TIMEOUT = 2000;
 
-test('1 - Campo Vazio', async () => {
-    const browser = await webkit.launch();  // Lançar WebKit
-    const page = await browser.newPage();   // Criar uma nova página
+test('1 - Campo Vazio', async ({ page }) => {
 
     // Navega para a URL especificada
     await page.goto('https://horadoqa.github.io/login/');
@@ -20,6 +18,7 @@ test('1 - Campo Vazio', async () => {
     // Preenche os campos do formulário (deixando vazios)
     // await page.fill('#username', '');
     // await page.fill('#password', '');
+    
     await page.click('button:has-text("Entrar")');
     
     // Clica no botão "Entrar"
@@ -32,12 +31,12 @@ test('1 - Campo Vazio', async () => {
     const errorText = await errorMessage.textContent();
     expect(errorText).toBe("E-mail e senha são obrigatórios!");
 
-    await browser.close();  // Fecha o navegador após o teste
 });
 
-test('2 - E-mail Válido e Senha Inválida', async () => {
-    const browser = await webkit.launch();  // Lançar WebKit
-    const page = await browser.newPage();   // Criar uma nova página
+// O expect não pode ser usado diretamente com a variável errorMessage, pois ele precisa de um objeto Locator. 
+// Para corrigir isso, você deve usar o método textContent() do Locator para obter o texto antes de compará-lo.
+
+test('2 - E-mail Válido e Senha Inválida', async ({ page }) => {
 
     // Navega para a URL especificada
     await page.goto('https://horadoqa.github.io/login/');
@@ -64,12 +63,9 @@ test('2 - E-mail Válido e Senha Inválida', async () => {
     const errorText = await errorMessage.textContent();
     expect(errorText).toBe("E-mail ou senha inválidos!");
 
-    await browser.close();  // Fecha o navegador após o teste
 });
 
-test('3 - E-mail Inválido e Senha Válida', async () => {
-    const browser = await webkit.launch();  // Lançar WebKit
-    const page = await browser.newPage();   // Criar uma nova página
+test('3 - E-mail Inválido e Senha Válida', async ({ page }) => {
 
     // Navega para a URL especificada
     await page.goto('https://horadoqa.github.io/login/');
@@ -96,12 +92,9 @@ test('3 - E-mail Inválido e Senha Válida', async () => {
     const errorText = await errorMessage.textContent();
     expect(errorText).toBe("E-mail ou senha inválidos!");
 
-    await browser.close();  // Fecha o navegador após o teste
 });
 
-test('4 - Ambos Inválidos', async () => {
-    const browser = await webkit.launch();  // Lançar WebKit
-    const page = await browser.newPage();   // Criar uma nova página
+test('4 - Ambos Inválidos', async ({ page }) => {
 
     // Navega para a URL especificada
     await page.goto('https://horadoqa.github.io/login/');
@@ -128,12 +121,9 @@ test('4 - Ambos Inválidos', async () => {
     const errorText = await errorMessage.textContent();
     expect(errorText).toBe("E-mail ou senha inválidos!");
 
-    await browser.close();  // Fecha o navegador após o teste
 });
 
-test('5 - Ambos Válidos', async () => {
-    const browser = await webkit.launch();  // Lançar WebKit
-    const page = await browser.newPage();   // Criar uma nova página
+test('5 - Ambos Válidos', async ({ page }) => {
 
     // Navega para a URL especificada
     await page.goto('https://horadoqa.github.io/login/');
@@ -163,5 +153,4 @@ test('5 - Ambos Válidos', async () => {
 
     await page.waitForTimeout(TIMEOUT);
 
-    await browser.close();  // Fecha o navegador após o teste
 });
